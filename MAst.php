@@ -88,6 +88,23 @@ class MArray implements MAst {
 	}
 }
 
+class MArrayAccessor implements MAst {
+	private $array;
+	private $index;
+
+	public function __construct(MAst $array, MAst $index) {
+		$this->array = $array;
+		$this->index = $index;
+	}
+	
+	public function to_string() : string {
+		$array = $this->array->to_string();
+		$index = $this->index->to_string();
+		return "{$array}[{$index}]";
+	}
+
+}
+
 abstract class MSequence implements MAst {
 	private $seq;
 
@@ -267,7 +284,7 @@ class MIf implements MAst {
 		} else {
 			$else = " else " . $this->else->to_string();
 		}
-		return "if {$predicate} {$then}{$else}";
+		return "if ({$predicate}) {$then}{$else}";
 	}
 }
 
@@ -408,4 +425,10 @@ class MTypecast implements MAst {
 		return "({$this->type})" . $this->ast->to_string();
 	}
 
+}
+
+class MVarDump extends MApplication {
+	public function __construct($arg) {
+		parent::__construct(new MId("var_dump"), [$arg]);
+	}
 }
