@@ -17,11 +17,11 @@ class MClass implements MAst {
 		$this->name = $name;
 	}
 
-	public function add_var(MAst $var) {
+	final public function add_var(MAst $var) {
 		$this->vars[] = $var;
 	}
 
-	public function add_function(MAst $fn) {
+	final public function add_function(MAst $fn) {
 		$this->functions[] = $fn;
 	}
 
@@ -32,12 +32,12 @@ class MClass implements MAst {
 		return "class {$name} {\n\n{$vs}\n\n{$fs}\n }";
 	}
 
-	private function render_vars() {
+	final private function render_vars() {
 		$f = function ($x) { return $x->to_string() . ";"; };
 		return join("\n", array_map($f, $this->vars));
 	}
 	
-	private function render_functions() {
+	final private function render_functions() {
 		$f = function ($x) { return $x->to_string(); };
 		return join("\n\n", array_map($f, $this->functions));
 	}
