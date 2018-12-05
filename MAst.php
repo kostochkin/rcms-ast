@@ -25,7 +25,7 @@ class MClass implements MAst {
 		$this->functions[] = $fn;
 	}
 
-	public function to_string() : string {
+	final public function to_string() : string {
 		$name = $this->name->to_string();
 		$vs = $this->render_vars();
 		$fs = $this->render_functions();
@@ -152,6 +152,22 @@ class MId implements MAst {
 		return $this->name;
 	}
 }
+
+class MHygienicId extends MId {
+	public function __construct(string $name) {
+		parent::__construct("h_" . $name);
+	}
+}
+
+class MUHygienicId extends MId {
+	static private $n = 0;
+
+	public function __construct() {
+		parent::__construct(sprintf("hu_%'.05x", self::$n));
+		self::$n += 1;
+	}
+}
+
 
 class MObjectAccessor implements MAst {
 	private $obj;
