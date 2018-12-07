@@ -10,4 +10,8 @@ class MReturn implements MAst {
 		$this->node = $node;
 	}
 
+	public function to_string() : string {
+		return "return " . $this->node->to_string();
+	}
+}
 
