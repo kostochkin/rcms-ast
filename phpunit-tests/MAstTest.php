@@ -1,12 +1,12 @@
 <?php
 
-namespace rCMS\MAst;
+namespace rCMS\Compiler\MAst\Base;
 
-require "MAst.php";
+require_once("includes.php");
 
 use PHPUnit\Framework\TestCase;
 
-final class ASTtest extends TestCase {
+final class MASTtest extends TestCase {
 	public function test_MId() : void {
 		$mid = new MId("foo");
 		$this->assertEquals(
