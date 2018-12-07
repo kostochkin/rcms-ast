@@ -1,4 +1,4 @@
-# rCMS\MAst
+# rCMS\Compiler\MAst\Base
 
 This module implements PHP abstract syntax tree in PHP.
 
